@@ -41,7 +41,7 @@
                             <div class="input-group date form_date" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
                                 <input class="form-control" size="16" name="start_date" type="text" value="" >
                                 <span class="input-group-addon">
-                                    <span class="fa fa-calendar"></span>
+                                    <span class="fa fa-"></span>
                                 </span>
                             </div>
                         </div>
