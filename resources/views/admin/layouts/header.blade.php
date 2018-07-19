@@ -5,47 +5,33 @@
         <span></span>
     </div>
     <ul class="top-header-links">
-        <li class="dropdown">
-            <button class="custom-btn dropdown-toggle" type="button" data-toggle="dropdown">
-                <i class="far fa-bell"></i>
-                <div class="count">2</div>
-            </button>
-            <div class="dropdown-menu">
-                <ul>
-                    <li class="notfy-item">
-                        hi , i have some questions
-                        <div class="notfy-time">
-                            <i class="far fa-clock"></i>
-                            now
-                        </div>
-                    </li>
-                    <li class="notfy-item">
-                        hi , i have some questions
-                        <div class="notfy-time">
-                            <i class="far fa-clock"></i>
-                            now
-                        </div>
-                    </li>
-                    <li class="notfy-item">
-                        hi , i have some questions
-                        <div class="notfy-time">
-                            <i class="far fa-clock"></i>
-                            now
-                        </div>
-                    </li>
-                    <li class="notfy-item">
-                        hi , i have some questions
-                        <div class="notfy-time">
-                            <i class="far fa-clock"></i>
-                            now
-                        </div>
-                    </li>
-                </ul>
-                <div class="drop-footer">
-                    <a href="notifactions.html">view all</a>
+        @if(auth()->guard('admins')->user()->type == 'promoter')
+            <li class="dropdown">
+                <button class="custom-btn dropdown-toggle" type="button" data-toggle="dropdown">
+                    <i class="far fa-bell"></i>
+                    <div class="count">{{\App\Notification::where('receiver_id' , auth()->guard('admins')->user()->id)->count()}}</div>
+                </button>
+                <div class="dropdown-menu">
+                    <ul>
+                        @php
+                            $notifications = \App\Notification::where('receiver_id' , Auth::guard('admins')->user()->id)->take(3)->get()
+                        @endphp
+                        @foreach($notifications as $notification)
+                            <li class="notfy-item">
+                                You have a new message
+                                <div class="notfy-time">
+                                    <i class="far fa-clock"></i>
+                                    {{$notification->created_at->diffForHumans()}}
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                    <div class="drop-footer">
+                        <a href="{{route('admin.notifications.all')}}">view all</a>
+                    </div>
                 </div>
-            </div>
-        </li>
+            </li>
+        @endif
         <li class="profile">
             <a href="{{route('admin.dashboard')}}" class="custom-btn">
                 <img src="{{asset('storage/uploads/users/'.auth()->guard('admins')->user()->image)}}">

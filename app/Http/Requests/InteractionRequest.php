@@ -56,6 +56,8 @@ class InteractionRequest extends FormRequest
         $interaction->number = $this->number;
         $interaction->email = $this->email;
         $interaction->comment = $this->comment;
+        $interaction->promoter_id = auth()->guard('admins')->user()->id;
+        $interaction->project_id = $this->project_id;
 
         $interaction->save();
     }

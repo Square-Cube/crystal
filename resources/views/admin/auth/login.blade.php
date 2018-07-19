@@ -41,7 +41,7 @@
                                 <div class="col-md-12">
                                     <div class="login-register">
                                         <div class="logo">
-                                            <img src="{{asset('assets/admin/images/logo-icon.png')}}">
+                                            <img src="{{asset('assets/admin/images/logo.png')}}">
                                         </div>
                                         <form class="login-form" action="{{ route('admin.login') }}" method="post" >
                                             {!! csrf_field() !!}

@@ -7,6 +7,8 @@
                 <form class="add-inter-form" action="{{route('admin.interaction')}}" method="post" enctype="multipart/form-data">
                     {!! csrf_field() !!}
 
+                    <input type="hidden" name="project_id" value="{{$project->id}}">
+
                     <div class="alert alert-success hidden SuccessMessage" id=""></div>
                     <div class="alert alert-danger hidden ErrorMessage" id=""></div>
 

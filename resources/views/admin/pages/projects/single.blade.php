@@ -1,17 +1,35 @@
 @extends('admin.layouts.master')
 @section('title')
-    {{$project->name}}
+    {{$singleProject->name}}
 @endsection
 @section('models')
-    <div class="modal fade" id="delete-proj" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="delete-user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form class="modal-content text-center">
+            <form class="modal-content text-center" action="{{route('admin.projects.detach' ,['id' => $singleProject->id])}}" method="Get">
+                {!! csrf_field() !!}
+
+                <input type="hidden" name="user_id" id="DetachUserId">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">do you want to delete project ?</h5>
                 </div>
                 <div class="modal-footer text-center">
-                    <a type="button" style="cursor: pointer;" class="custom-btn red-bc modalDLTBTN">delete</a>
-                    <a type="button" style="cursor: pointer;" class="custom-btn green-bc" data-dismiss="modal">close</a>
+                    <button type="submit" class="custom-btn red-bc ">delete</button>
+                    <button type="submit" class="custom-btn green-bc" data-dismiss="modal">close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal fade" id="delete-proj" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form class="modal-content text-center" >
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">do you want to delete project ?</h5>
+                </div>
+                <div class="modal-footer text-center">
+                    <a type="button" class="custom-btn red-bc modalDLTBTN">delete</a>
+                    <a type="button" class="custom-btn green-bc" data-dismiss="modal">close</a>
                 </div>
             </form>
         </div>
@@ -20,41 +38,41 @@
 @section('content')
     <div class="content">
         <div class="widget">
-            <div class="widget-title">{{$project->name}}</div>
+            <div class="widget-title">{{$singleProject->name}}</div>
             <div class="widget-content only-project">
                 <div class="col-md-12">
                     <div class="title">
-                        {{$project->name}}
+                        {{$singleProject->name}}
                         <div class="action">
-                            <a href="{{route('admin.projects.edit',['id' => $project->id])}}" class="custom-btn">edit</a>
-                            <button data-toggle="modal" data-url="{{route('admin.projects.delete',['id' => $project->id])}}" data-target="#delete-proj" class="red-bc custom-btn deleteBTN">delete</button>
+                            <a href="{{route('admin.projects.edit',['id' => $singleProject->id])}}" class="custom-btn">edit</a>
+                            <button data-toggle="modal" data-url="{{route('admin.projects.delete',['id' => $singleProject->id])}}" data-target="#delete-proj" class="red-bc custom-btn deleteBTN">delete</button>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="details">
                         <div class="det-img">
-                            <img src="{{asset('storage/uploads/projects/'.$project->logo)}}">
+                            <img src="{{asset('storage/uploads/projects/'.$singleProject->logo)}}">
                         </div>
                         <div class="info">
                             <span>about : </span>
-                            {{$project->about}}
+                            {{$singleProject->about}}
                         </div>
                         <div class="info">
                             <span>address : </span>
-                            {{$project->address}}
+                            {{$singleProject->address}}
                         </div>
                         <div class="info">
-                            <span>Promoters : <i>[ {{$project->users->count()}} employees ]</i></span>
-                            @foreach($project->users as $user)
+                            <span>Promoters : <i>[ {{$singleProject->users->count()}} employees ]</i></span>
+                            @foreach($singleProject->users as $user)
                                 <li class="employ-item inline-employ">
                                     <img src="{{asset('storage/uploads/users/'.$user->image)}}">
-                                    <a href="user-survay.html"> {{$user->username}}</a>
+                                    <a href="{{route('admin.users.details' ,['singleProduct' => $singleProject->id ,'user' => $user->id])}}"> {{$user->username}}</a>
                                     <div class="action-btns">
-                                        <a href="send_notifications.html" class="custom-btn">
+                                        <a href="{{route('admin.notifications',['id' => $user->id])}}" class="custom-btn">
                                             <i class="fa fa-envelope"></i>
                                         </a>
-                                        <button  data-toggle="modal" data-target="#delete-user" class="red-bc custom-btn">
+                                        <button data-id="{{$user->id}}" data-toggle="modal" data-target="#delete-user" class="red-bc custom-btn detachUser">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </div>
@@ -65,7 +83,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="project-map">
-                        <input type="hidden" value="{{$project->address}}" id="Location" class="geocomplete"  ><br>
+                        <input type="hidden" value="{{$singleProject->address}}" id="Location" class="geocomplete"  ><br>
                         <div class="map_canvas"></div>
                     </div>
                 </div>

@@ -13,7 +13,9 @@
                         <div class="profile-cont">
                             <ul>
                                 <li><span>Your Name : </span> {{auth()->guard('admins')->user()->username}}</li>
-                                <li><span>Your Location : </span> {{$member->attendances()->latest()->value('location')}}</li>
+                                @if(auth()->guard('admins')->user()->type == 'promoter')
+                                    <li><span>Your Location : </span> {{$member->attendances()->latest()->value('location')}}</li>
+                                @endif
                                 <li><span>Date : </span> {{\Carbon\Carbon::parse($member->attendances()->latest()->value('time'))->format('d - m - Y')}}</li>
                                 <li><span>Time : </span> {{\Carbon\Carbon::parse($member->attendances()->latest()->value('time'))->format('g:i A')}}</li>
                             </ul>

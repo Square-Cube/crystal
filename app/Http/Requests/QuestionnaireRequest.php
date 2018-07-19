@@ -67,6 +67,8 @@ class QuestionnaireRequest extends FormRequest
         $question->rate = $this->rate;
         $question->recommend = $this->recommend;
         $question->learn = $this->learn;
+        $question->promoter_id = auth()->guard('admins')->user()->id;
+        $question->project_id = $this->project_id;
 
         $question->save();
     }

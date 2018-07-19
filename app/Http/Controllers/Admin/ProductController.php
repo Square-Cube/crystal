@@ -33,6 +33,7 @@ class ProductController extends Controller
 
         $product->number = $request->number;
         $product->user_id = auth()->guard('admins')->user()->id;
+        $product->project_id = $this->project_id;
 
         // get the image data
         $data = $request->image;

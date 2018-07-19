@@ -121,8 +121,13 @@ $('#EndBreakBTN').on('click' ,function () {
 ////Delete method
 $('.deleteBTN').on('click' ,function () {
     var url = $(this).data('url');
-
     var button = $('.modalDLTBTN');
 
     button.attr('href' ,url);
+});
+
+
+// detach user
+$('.detachUser').on('click',function () {
+   $('#DetachUserId').val($(this).data('id'));
 });

@@ -9,7 +9,7 @@
                 <div class="row text-center">
                     <div class="col-md-12 wel-cont">
                         <div class="logo">
-                            <img src="{{asset('assets/admin/images/logo.jpg')}}">
+                            <img src="{{asset('assets/admin/images/logo.png')}}">
                         </div>
                         <div class="mess">
                             <span>crystal</span><span> store</span><span> management</span>

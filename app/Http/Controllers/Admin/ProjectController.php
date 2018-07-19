@@ -32,9 +32,9 @@ class ProjectController extends Controller
         return ['status' => 'success' ,'data' => 'Project has been added successfully' ,'url' => route('admin.projects')];
     }
 
-    public function getSingleProject(Project $project)
+    public function getSingleProject(Project $singleProject)
     {
-        return view('admin.pages.projects.single' ,compact('project'));
+        return view('admin.pages.projects.single' ,compact('singleProject'));
     }
 
     public function getDelete($id)
@@ -49,12 +49,12 @@ class ProjectController extends Controller
         return redirect()->route('admin.projects');
     }
 
-    public function getEdit(Project $project)
+    public function getEdit(Project $singleProject)
     {
         $users = User::where('type' ,'promoter')->get();
 
 
-        return view('admin.pages.projects.edit' ,compact('project' , 'users'));
+        return view('admin.pages.projects.edit' ,compact('singleProject' , 'users'));
     }
 
     public function postEdit(ProjectRequest $request , $id)
@@ -62,5 +62,14 @@ class ProjectController extends Controller
         $request->edit($id);
 
         return ['status' => 'success' ,'data' => 'Project has been updated successfully'];
+    }
+
+    public function getDetachUser($id , Request $request)
+    {
+        $project = Project::find($id);
+
+        $project->users()->wherePivot('user_id' , $request->user_id)->detach();
+
+        return redirect()->back();
     }
 }

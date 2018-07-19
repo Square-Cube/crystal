@@ -1,6 +1,10 @@
 <div class="side-menu">
     <a href="{{route('admin.dashboard')}}" class="logo">
-        <img src="{{asset('assets/admin/images/logo-icon.png')}}">
+        @if($project != null)
+            <img src="{{asset('storage/uploads/projects/'.$project->logo)}}">
+            @else
+            <img src="{{asset('assets/admin/images/logo.png')}}">
+        @endif
     </a><!--End Logo-->
     <aside class="sidebar">
         <ul class="side-menu-links">
@@ -10,7 +14,7 @@
                     dashboard
                 </a>
             </li>
-            @if(auth()->guard('admins')->user()->type == 'promoter')
+            @if(auth()->guard('admins')->user()->type == 'promoter' && $project != null)
                 <li class="@if(Request::route()->getName() == 'admin.interaction'){{'active'}}@endif">
                     <a href="{{route('admin.interaction')}}">
                         <img src="{{asset('assets/admin/images/icon1.png')}}">
@@ -44,7 +48,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="send_notifications.html">
+                    <a href="{{route('admin.notifications')}}">
                         <img src="{{asset('assets/admin/images/send_notifications.png')}}">
                         send notifications
                     </a>

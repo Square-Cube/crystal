@@ -42,8 +42,8 @@ class ProjectRequest extends FormRequest
                 'about' => 'required',
                 'logo' => 'required|image|mimes:jpeg,jpg,png,gif|max:20000',
                 'promoters' => 'required',
-                'start_date' => 'required',
-                'end_date' => 'required'
+                'start_date' => 'required|date|after:today',
+                'end_date' => 'required|date|after:start_date'
             ];
         }else{
             return [
@@ -52,8 +52,8 @@ class ProjectRequest extends FormRequest
                 'about' => 'required',
                 'logo' => 'image|mimes:jpeg,jpg,png,gif|max:20000',
                 'promoters' => 'required',
-                'start_date' => 'required',
-                'end_date' => 'required'
+                'start_date' => 'required|date|after:today',
+                'end_date' => 'required|date|after:start_date'
             ];
         }
     }
@@ -72,7 +72,9 @@ class ProjectRequest extends FormRequest
                 'logo.max' => 'logo size should be less than 2MB',
                 'promoters.required' => 'Please select promoters',
                 'start_date.required' => 'Please select project start date',
-                'end_date.required' => 'Please select project end date'
+                'start_date.today' => 'Start date should be after today',
+                'end_date.required' => 'Please select project end date',
+                'end_date.after' => 'End date should be after start date'
             ];
         }else{
             return [
@@ -84,7 +86,9 @@ class ProjectRequest extends FormRequest
                 'logo.max' => 'logo size should be less than 2MB',
                 'promoters.required' => 'Please select promoters',
                 'start_date.required' => 'Please select project start date',
-                'end_date.required' => 'Please select project end date'
+                'start_date.today' => 'Start date should be after today',
+                'end_date.required' => 'Please select project end date',
+                'end_date.after' => 'End date should be after start date'
             ];
         }
     }

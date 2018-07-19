@@ -70,6 +70,7 @@ Route::group(['namespace' => 'Admin'] ,function (){
             Route::get('/add-new-user' ,['as' => 'admin.users.index' ,'uses' => 'UserController@getAddUser']);
             Route::post('/add-user' ,['as' => 'admin.users.add' ,'uses' => 'UserController@postIndex']);
             Route::get('/delete/{id}' ,['as' => 'admin.users.delete' ,'uses' => 'UserController@getDelete']);
+            Route::get('/details/{singleProject}/{user}' ,['as' => 'admin.users.details' ,'uses' => 'UserController@getUserDetails']);
         });
 
         /**
@@ -79,10 +80,20 @@ Route::group(['namespace' => 'Admin'] ,function (){
             Route::get('/' ,['as' => 'admin.projects' ,'uses' => 'ProjectController@getIndex']);
             Route::get('/add-project' ,['as' => 'admin.projects.add' ,'uses' => 'ProjectController@getAddProject']);
             Route::post('/add-project' ,['as' => 'admin.projects.add' ,'uses' => 'ProjectController@postIndex']);
-            Route::get('/{project}' ,['as' => 'admin.projects.single' ,'uses' => 'ProjectController@getSingleProject']);
+            Route::get('/{singleProject}' ,['as' => 'admin.projects.single' ,'uses' => 'ProjectController@getSingleProject']);
             Route::get('/delete/{id}' ,['as' => 'admin.projects.delete' ,'uses' => 'ProjectController@getDelete']);
-            Route::get('/edit/{project}' ,['as' => 'admin.projects.edit' ,'uses' => 'ProjectController@getEdit']);
+            Route::get('/edit/{singleProject}' ,['as' => 'admin.projects.edit' ,'uses' => 'ProjectController@getEdit']);
             Route::post('/edit/{id}' ,['as' => 'admin.projects.edit' ,'uses' => 'ProjectController@postEdit']);
+            Route::get('/detach/{id}' ,['as' => 'admin.projects.detach' ,'uses' => 'ProjectController@getDetachUser']);
+        });
+
+        /**
+         * notification routes
+         */
+        Route::group(['prefix' => 'notifications'] ,function (){
+            Route::get('/send-notification/{id?}' ,['as' => 'admin.notifications' ,'uses' => 'NotificationController@getIndex']);
+            Route::post('/send-notification/{id?}' ,['as' => 'admin.notifications' ,'uses' => 'NotificationController@postIndex']);
+            Route::get('/all-notifications' ,['as' => 'admin.notifications.all' ,'uses' => 'NotificationController@getAll']);
         });
     });
 });

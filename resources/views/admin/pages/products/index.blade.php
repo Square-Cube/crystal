@@ -10,6 +10,8 @@
                 <div class="col-sm-5">
                     <form class="prod-count-form" action="{{route('admin.products')}}" method="post" enctype="multipart/form-data">
                         {!! csrf_field() !!}
+                        <input type="hidden" name="project_id" value="{{$project->id}}">
+
                         <div class="alert alert-success hidden SuccessMessage" id=""></div>
                         <div class="alert alert-danger hidden ErrorMessage" id=""></div>
                         <div class="form-group">

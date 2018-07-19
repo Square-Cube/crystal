@@ -9,21 +9,21 @@
             <div class="widget-content">
                 <a href="{{route('admin.projects.add')}}" class="custom-btn">add project</a>
                 <div class="spacer-15"></div>
-                @foreach($projects as $project)
+                @foreach($projects as $singleProject)
                     <div class="col-md-3 col-sm-6">
                         <div class="proj-item">
                             <div class="proj-item-img">
-                                <img src="{{asset('storage/uploads/projects/'.$project->logo)}}">
+                                <img src="{{asset('storage/uploads/projects/'.$singleProject->logo)}}">
                             </div>
                             <div class="proj-item-content">
-                                <a class="title" href="{{route('admin.projects.single',['id' => $project->id])}}">{{$project->name}}</a>
+                                <a class="title" href="{{route('admin.projects.single',['id' => $singleProject->id])}}">{{$singleProject->name}}</a>
                                 <p>
-                                    {{str_limit($project->about , 150)}}
+                                    {{str_limit($singleProject->about , 150)}}
                                 </p>
-                                <a href="{{route('admin.projects.single',['id' => $project->id])}}" class="custom-btn">
+                                <a href="{{route('admin.projects.single',['id' => $singleProject->id])}}" class="custom-btn">
                                     more details
                                 </a>
-                                <a href="{{route('admin.projects.edit',['id' => $project->id])}}" class="custom-btn">
+                                <a href="{{route('admin.projects.edit',['id' => $singleProject->id])}}" class="custom-btn">
                                     edit project
                                 </a>
                             </div>
