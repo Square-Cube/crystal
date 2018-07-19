@@ -6,7 +6,7 @@
                 <div class="row text-center">
                     <div class="col-md-12 map-check">
                         <div class="logo">
-                            <img src="{{asset('assets/admin/images/logo-icon.png')}}">
+                            <img src="{{asset('assets/admin/images/logo.png')}}">
                         </div>
                     </div>
                     <div class="map" id="mapholder"></div>
@@ -29,7 +29,7 @@
     </div>
 @endsection
 @section('js')
-    <script src="https://maps.google.com/maps/api/js?key=AIzaSyCHtIuAaCTFFFyJjCq384wQi66e7Kthu-w"></script>
+    <script src="https://maps.google.com/maps/api/js?key=AIzaSyAABrilV0K0SLv21ZVMv8Inz5YMI4YAKbI"></script>
     <script>
 
         $(document).ready(function() {
